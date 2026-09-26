@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Trading Bot</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b1020;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #111a33;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #26345c;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    header p {
+      color: #9da9c9;
+      margin-top: 6px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #121b35;
+      border: 1px solid #26345c;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      color: #9da9c9;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .green {
+      color: #31e981;
+    }
+
+    .red {
+      color: #ff5570;
+    }
+
+    .panel {
+      background: #121b35;
+      border: 1px solid #26345c;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .panel h2 {
+      margin-bottom: 15px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      background: #0b1020;
+      color: white;
+      border: 1px solid #33436f;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2864ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #174bd1;
+    }
+
+    .status {
+      padding: 12px;
+      background: #0b1020;
+      border-radius: 8px;
+      margin-top: 15px;
+      color: #9da9c9;
+    }
+
+    .signal {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      color: #697596;
+      padding: 20px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🤖 AI Trading Bot</h1>
+    <p>Smart Market Analysis Dashboard</p>
+  </header>
+
+  <div class="container">
+
+    <div class="dashboard">
+
+      <div class="card">
+        <h3>ACCOUNT BALANCE</h3>
+        <div class="value">$0.00</div>
+      </div>
+
+      <div class="card">
+        <h3>AI STATUS</h3>
+        <div class="value green">ONLINE</div>
+      </div>
+
+      <div class="card">
+        <h3>MARKET</h3>
+        <div class="value">EUR/USD</div>
+      </div>
+
+      <div class="card">
+        <h3>BOT MODE</h3>
+        <div class="value">DEMO</div>
+      </div>
+
+    </div>
+
+    <div class="panel">
+      <h2>⚙️ Trading Settings</h2>
+
+      <label>Trading Pair</label>
+      <select id="pair">
+        <option>EUR/USD</option>
+        <option>GBP/USD</option>
+        <option>USD/JPY</option>
+        <option>EUR/GBP</option>
+      </select>
+
+      <label>Risk Level</label>
+      <select id="risk">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+
+      <button onclick="analyzeMarket()">🤖 Analyze Market</button>
+
+      <div class="status" id="status">
+        AI is waiting for market analysis...
+      </div>
+
+      <div class="signal" id="signal"></div>
+    </div>
+
+    <div class="panel">
+      <h2>📊 AI Trading Information</h2>
+      <p style="color:#9da9c9; line-height:1.6;">
+        This dashboard is currently a demo interface.
+        Connect a legitimate market-data API and broker API
+        before using real trading.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    AI Trading Bot • Demo Mode
+  </footer>
+
+  <script>
+    function analyzeMarket() {
+
+      const pair = document.getElementById("pair").value;
+      const risk = document.getElementById("risk").value;
+
+      document.getElementById("status").innerText =
+        "AI is analyzing " + pair + " with " + risk + " risk...";
+
+      document.getElementById("signal").innerText = "";
+
+      setTimeout(function() {
+
+        const signals = [
+          "BUY",
+          "SELL",
+          "WAIT"
+        ];
+
+        const signal =
+          signals[Math.floor(Math.random() * signals.length)];
+
+        document.getElementById("status").innerText =
+          "Analysis completed for " + pair;
+
+        document.getElementById("signal").innerText =
+          "AI Signal: " + signal;
+
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
